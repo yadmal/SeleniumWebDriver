@@ -1,0 +1,16 @@
+Selenium может не запустить IE по следующим причинам
+1. Неверные настройки безопасности
+
+Свойства браузера -> Безопасность
+Для каждой из представленных зон "Интернет", "Местная интрасеть", "Надежные сайты", "Опасные сайты" одновременно должен быть либо включен, либо выключен защитный режим, т.е. защищенный режим должне быть вкл/выкл одновременно для всех 4 зон
+
+2. Неправильный масштаб
+Должно быть выставлено 100%
+
+Если настройки запрещено изменять политиками безопасности, то можно прописать опции для их игнорирования
+     DesiredCapabilities caps = new DesiredCapabilities();
+     caps.setCapability(InternetExplorerDriver.IGNORE_ZOOM_SETTING, true);
+     caps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+     driver = new InternetExplorerDriver(caps);
+
+INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS может привести к ошибкам, поэтому рекомендуется правильно выставить настройки из п.1
