@@ -1,0 +1,5 @@
+Для открытия страницы можно использовать методы:
+  -get("http://google.com/")
+  -navigate().to("http://google.com/")
+Selenium автоматически НЕ вставляет в адрес "http://"
+При использовании "www" (без указания протокола http) получим сообщение об ошибке "Cannot navigate to invalid URL"
