@@ -86,3 +86,6 @@ fabric.properties
 .idea/httpRequests
 
 /.idea/sonarlint/
+/.idea/
+/SeleniumLessons.iml
+
