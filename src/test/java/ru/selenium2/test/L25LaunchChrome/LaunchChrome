@@ -1,0 +1,28 @@
+Официальная документация
+http://chromedriver.chromium.org/capabilities
+
+
+Настройки в конструктор драйвера предеаются при помощи объекта Capabilities, но в некоторых языках программирования есть вспомогательный класс ChromeOptions для более удобной настройки параметров запуска браузера
+Иногда вспомогательный исполняемый файл не может найти исполняемый файл браузера Chrome (нестандартное месторасположение, несколько версий браузера)
+Явное указание пути к файлу
+
+  ChromeOptions options = new ChromeOptions();
+  options.setBinary("/path/to/other/chrome/binary");
+
+Некоторые настройки можно передавать не через Options, а путем изменения профиля, который так же содержит набор пользовательских настроек
+Во время запуска нового экземпляра браузера Chrome, Selenium готовит для него новый профиль с дефолтными настройками, которые можно изменить
+Пример с ChromeOptions (если нет экземпляра этого класса, то придется использовать объект Capabilities, но это более громоздкое решение)
+
+ChromeOptions options = new ChromeOptions();
+Map<String, Object> prefs = new HashMap<String, Object>();
+prefs.put("profile.default_content_settings.popups", 0);
+options.setExperimentalOption("prefs", prefs);
+
+Кроме настроек можно устанавливать дополнения к браузеру
+    ChromeOptions options = new ChromeOptions();
+    options.addExtensions(new File("/path/to/extension.crx"));
+    ChromeDriver driver = new ChromeDriver(options);
+
+Для использования уже существующего профиля, в котором выполнены все необходимые настройки и установлены необхдодимые дополнения
+    ChromeOptions options = new ChromeOptions();
+    options.addArguments("user-data-dir=/path/to/your/custom/profile");
